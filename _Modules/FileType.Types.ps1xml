@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- *******************************************************************
+
+Файл встраивания командлета определения типа Get-TypeFile из модуля 
+CommonFn.psm1 в объект [System.IO.FileInfo]
+
+Данный файл должен располагаться в домашней директории PoweShell - $PSHOME
+
+Перед использованием возможностей определения типа файла в объекте [System.IO.FileInfo]
+в текущем сеансе надо обновить описание типов данных командой
+Update-TypeData -PrependPath $PSHOME\FileType.Types.ps1xml
+
+Разработчик 	Попов А.В. 
+Дата изменения	20.05.2024
+
+******************************************************************** -->
+<Types>
+    <Type>
+        <Name>System.IO.FileInfo</Name>
+        <Members>
+            <ScriptProperty>
+                <Name>TypeFile</Name>
+                <GetScriptBlock>
+                    Get-TypeFile -FileNameOrExt $this IO.FileInfo
+                </GetScriptBlock>
+            </ScriptProperty>
+            <AliasProperty>
+                <Name>FileTypeExt</Name>
+                <ReferencedMemberName>TypeFileExt</ReferencedMemberName>
+            </AliasProperty>
+        </Members>
+    </Type>
+</Types>
